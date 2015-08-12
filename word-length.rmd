@@ -1,0 +1,11 @@
+# Frequency of English word length
+```{r}
+library(readr)
+library(ggplot2)
+filename <- commandArgs(trailingOnly = TRUE)
+filename
+data <- read_tsv(filename)
+ggplot(data) +
+    aes(x = Length, y = Count) +
+    geom_point()
+```
