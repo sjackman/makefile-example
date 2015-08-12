@@ -39,3 +39,11 @@ fr.txt:
 
 # Data dependencies of the compare-en-fr RMarkdown report
 compare-en-fr.html: en.tsv fr.tsv
+
+# Render a figure of this pipeline
+Makefile.gv: Makefile
+	makefile2graph >Makefile.gv
+
+# Render a GraphViz file to PNG
+%.png: %.gv
+	dot -Tpng -o $*.png $*.gv
