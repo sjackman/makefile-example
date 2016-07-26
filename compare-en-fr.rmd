@@ -27,15 +27,17 @@ glimpse(data)
 # Plot word length frequency
 ```{r plot}
 ggplot(data) +
-	aes(x = Length, y = Proportion,
-		colour = Language) +
-	geom_smooth(method = "loess")
+	aes(x = Length, y = Proportion, colour = Language) +
+	geom_point() + geom_line()
 ```
 
 # Perform KS test and Wilcoxan test
 ```{r perform-tests}
-en_rep <- en %$% rep.int(Length, Count)
-fr_rep <- fr %$% rep.int(Length, Count)
-ks.test(en_rep, fr_rep)
-wilcox.test(en_rep, fr_rep)
+en_length <- en %$% rep.int(Length, Count)
+fr_length <- fr %$% rep.int(Length, Count)
+ks.test(en_length, fr_length)
+wilcox.test(en_length, fr_length)
+diff_median <- median(fr_length) - median(en_length)
 ```
+
+The difference between median word lengths is `r diff_median`.
