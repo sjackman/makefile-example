@@ -10,12 +10,16 @@ clean:
 .DELETE_ON_ERROR:
 
 # Download the list of English words
-en.txt:
-	curl -o en.txt http://www-01.sil.org/linguistics/wordlists/english/wordlist/wordsEn.txt
+en.crlf.txt:
+	curl -o en.crlf.txt http://www-01.sil.org/linguistics/wordlists/english/wordlist/wordsEn.txt
 
 # Download the list of French words
 fr.txt:
 	curl -o fr.txt https://raw.githubusercontent.com/atebits/Words/master/Words/fr.txt
+
+# Convert CRLF line endings to LF
+%.txt: %.crlf.txt
+	tr -d '\r' <$*.crlf.txt >$*.txt
 
 # Calculate words lengths
 %.length.tsv: %.txt
