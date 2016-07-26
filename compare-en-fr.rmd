@@ -1,11 +1,11 @@
 ---
 title: Compare English and French word lengths
 author: Shaun Jackman
-date: 2015-08-11
+date: 2016-07-26
 ---
 
 # Load packages
-```{r load-packages}
+```{r load-packages, message = FALSE}
 library(dplyr)
 library(ggplot2)
 library(magrittr)
@@ -15,11 +15,9 @@ library(readr)
 # Load data
 ```{r read-data}
 en <- read_tsv("en.tsv") %>%
-	mutate(Language = "English",
-		Proportion = Count / sum(Count))
+	mutate(Language = "English", Proportion = Count / sum(Count))
 fr <- read_tsv("fr.tsv") %>%
-	mutate(Language = "French",
-				Proportion = Count / sum(Count))
+	mutate(Language = "French", Proportion = Count / sum(Count))
 data <- rbind(en, fr)
 glimpse(data)
 ```
@@ -40,4 +38,5 @@ wilcox.test(en_length, fr_length)
 diff_median <- median(fr_length) - median(en_length)
 ```
 
-The difference between median word lengths is `r diff_median`.
+The difference between the median word length of English and French is
+`r diff_median`.
